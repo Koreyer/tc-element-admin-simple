@@ -1,3 +1,3 @@
 <template>
-    demo4
+    Dashboard
 </template>

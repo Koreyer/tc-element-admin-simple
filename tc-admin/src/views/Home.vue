@@ -10,7 +10,7 @@
             <Header />
           </el-header>
           <el-main>
-            <RouterView />
+            <Main />
           </el-main>
 
         </el-container>
@@ -28,6 +28,9 @@
 import { useAsiderStore } from '../stores/asider';
 const asiderStore = useAsiderStore()
 import Aside from '../components/Layout/Aside.vue'
+
+// 主页
+import Main from '../components/Layout/Main.vue';
 
 //页头
 import Header from '../components/Layout/Header.vue';

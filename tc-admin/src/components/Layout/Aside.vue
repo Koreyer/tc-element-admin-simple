@@ -3,7 +3,7 @@
     @open="handleOpen" router @close="handleClose" :collapse-transition="false">
     <div class="logo">
       <el-image style="width: 32px; height: 32px" :src="url" fit="fill" />
-      <div class="logo-title" v-if="!asiderStore.isCollapse">TC-Admin</div>
+      <div class="logo-title" v-if="!asiderStore.isCollapse">{{ title }}</div>
     </div>
     <template v-for="menu in menus">
       <el-sub-menu v-if="menu.children?.length" :index="menu.name">
@@ -12,7 +12,7 @@
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="menu.icon"></use>
           </svg>
-          <span>&nbsp;&nbsp;{{ menu.name }}</span>
+          <span>&nbsp;&nbsp;{{ menu.title }}</span>
         </template>
         <el-menu-item-group>
           <!-- 循环children -->
@@ -20,7 +20,7 @@
               class="icon el-icon" aria-hidden="true">
               <use :xlink:href="item.icon"></use>
             </svg>&nbsp;
-            <span>{{ item.name }}</span></el-menu-item>
+            <span>{{ item.title }}</span></el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
       <!-- 没有children的情况 -->
@@ -28,7 +28,7 @@
         <svg class="icon" aria-hidden="true">
           <use :xlink:href="menu.icon"></use>
         </svg>&nbsp;
-        <template #title>{{ menu.name }}</template></el-menu-item>
+        <template #title>{{ menu.title }}</template></el-menu-item>
     </template>
   </el-menu>
 </template>
@@ -37,6 +37,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+const title = import.meta.env.VITE_APP_TITLE
 
 import { useAsiderStore } from '../../stores/asider'
 const asiderStore = useAsiderStore()
@@ -51,23 +53,28 @@ import '/src/assets/iconfont.js'
 //菜单集合
 const menus = ref([
   {
-    name: 'Demo4',
-    icon: '#icon-setting'
+    title: 'Dashboard',
+    name: 'Dashboard',
+    icon: '#icon-dashboard'
   },
   {
+    title: '测试组',
     name: 'Group',
     icon: '#icon-user',
     children: [
       {
+        title: '用户',
         name: 'Demo1',
         icon: '#icon-user'
       },
       {
+        title: '分享',
         name: 'Demo2',
         icon: '#icon-share'
       }
     ]
   }, {
+    title: '设置',
     name: 'Demo3',
     icon: '#icon-setting'
   }
@@ -75,7 +82,29 @@ const menus = ref([
 
 // 点击item
 const itemChange = (array) => {
+  const name = array[array.length - 1]
+  asiderStore.addTableTab({ title: findTitleRecursive(menus.value, name), name: name })
+  asiderStore.activeIndex = name
   asiderStore.breadcrumbs = array
+}
+
+
+//递归查找
+function findTitleRecursive(menuItems, targetName) {
+  for (const menuItem of menuItems) {
+    if (menuItem.name === targetName) {
+      return menuItem.title;
+    }
+
+    if (menuItem.children && menuItem.children.length > 0) {
+      const foundTitle = findTitleRecursive(menuItem.children, targetName);
+      if (foundTitle) {
+        return foundTitle;
+      }
+    }
+  }
+
+  return null;
 }
 
 
@@ -130,6 +159,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   justify-content: space-between;
   padding: 10px 20px;
   height: 32px;
+  border-bottom: rgba($color: #409eff, $alpha: .3) 1px solid;
 
   .logo-title {
     width: 60%;

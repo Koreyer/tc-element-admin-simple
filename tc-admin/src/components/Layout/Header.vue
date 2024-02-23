@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <el-row class="row-demo">
+        <el-row class="row-demo lh46">
             <el-col :span="1" class="fold-icon" @click="foldChange">
                 <el-icon v-if="!asiderStore.isCollapse">
                     <Fold />
@@ -9,13 +9,50 @@
                     <Expand />
                 </el-icon>
             </el-col>
-            <el-col :span="10">
-                <el-breadcrumb separator="/">
-                    <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Demo4' }">Demo4</el-breadcrumb-item>
-                    <span v-if="asiderStore.breadcrumbs.find(x => x != 'Demo4')"><el-breadcrumb-item
+            <el-col :span="19">
+                <el-breadcrumb separator="/" class="lh46">
+                    <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Dashboard' }">Dashboard</el-breadcrumb-item>
+                    <span v-if="asiderStore.breadcrumbs.find(x => x != 'Dashboard')"><el-breadcrumb-item
                             v-for="item in asiderStore.breadcrumbs">{{ item }}</el-breadcrumb-item></span>
                 </el-breadcrumb></el-col>
 
+            <el-col :span="1">
+
+                <el-dropdown trigger="click" @command="languageCommand">
+
+                    <span class="el-dropdown-link">
+                        <div class="lh46 avatar">
+                            <svg class="icon el-icon" aria-hidden="true">
+                                <use xlink:href="#icon-fanyi"></use>
+                            </svg>
+                        </div>
+                    </span>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item command="zh">简体中文</el-dropdown-item>
+                            <el-dropdown-item command="en">英文</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+
+
+            </el-col>
+            <el-col :span="3">
+                <el-dropdown trigger="click">
+                    <span class="el-dropdown-link">
+                        <el-image class="avatar" src="/src/assets/avatar.jpg" fit="fill" />
+                    </span>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>Dashboard</el-dropdown-item>
+                            <el-dropdown-item>Gitee</el-dropdown-item>
+                            <el-dropdown-item>Docs</el-dropdown-item>
+                            <el-dropdown-item divided>Log Out</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+
+            </el-col>
         </el-row>
 
     </div>
@@ -34,11 +71,19 @@ import { useAsiderStore } from '/src/stores/asider.js'
 const asiderStore = useAsiderStore()
 const replaceHome = () => {
     // router.replace('/Demo4')
-    asiderStore.activeIndex = 'Demo4'
-    asiderStore.breadcrumbs = ['Demo4']
+    asiderStore.activeIndex = 'Dashboard'
+    asiderStore.breadcrumbs = ['Dashboard']
     setTimeout(() => {
         location.reload();
     }, 200)
+}
+
+//语言切换
+import { useI18n } from 'vue-i18n'
+const useI18 = useI18n()
+const languageCommand = (command) => {
+    useI18.locale.value = command
+    localStorage.setItem("language", command)
 }
 
 
@@ -53,16 +98,36 @@ const foldChange = () => {
 
 <style lang="scss">
 .header {
-    height: 50px;
+    height: 56px;
+    border-bottom: 2px solid rgba($color: #ccc, $alpha: .2);
+    box-shadow: 0 2px 5px rgba(#f5f5f5, 0.1);
 
     .row-demo {
-        height: 50px;
-        padding-top: 10px;
 
         .fold-icon:hover {
             cursor: pointer;
         }
 
+        .avatar {
+            width: 46px;
+            height: 46px;
+            margin-top: 5px;
+            border-radius: 10px;
+        }
+
+        .avatar:hover {
+            cursor: pointer;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+    }
+
+    .lh46 {
+        line-height: 56px;
     }
 }
 </style>

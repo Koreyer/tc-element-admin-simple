@@ -2,12 +2,12 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useAsiderStore = defineStore('asider', () => {
-    const activeIndex = ref('Dashboard')
+    const activeIndex = ref('menu.dashboard')
     const breadcrumbs = ref([])
     const isCollapse = ref(false)
     const width = ref('200px')
-    const editableTabsValue = ref('Dashboard')
-    const editableTabs = ref([{ title: 'Dashboard', name: 'Dashboard' }])
+    const editableTabsValue = ref('menu.dashboard')
+    const editableTabs = ref([{ title: 'menu.dashboard', name: 'Dashboard' }])
     const changeWidth = () => {
         if (isCollapse.value) {
             width.value = '68px'
@@ -16,6 +16,7 @@ export const useAsiderStore = defineStore('asider', () => {
         }
     }
     const addTableTab = (obj) => {
+        // console.log('obj', obj)
         if (editableTabs.value.find(x => x.name == obj.name) == undefined)
             editableTabs.value.push({ title: obj.title, name: obj.name })
 
@@ -26,7 +27,7 @@ export const useAsiderStore = defineStore('asider', () => {
      * @returns 
      */
     const removeTab = (targetName) => {
-        if (targetName == import.meta.env.VITE_APP_Dashboard) {
+        if (targetName == 'menu.dashboard') {
             return false
         } else {
             editableTabs.value = editableTabs.value.filter((tab) => tab.name !== targetName)

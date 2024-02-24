@@ -12,23 +12,24 @@
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="menu.icon"></use>
           </svg>
-          <span>&nbsp;&nbsp;{{ menu.title }}</span>
+          <span>&nbsp;&nbsp;{{ $t(menu.title) }}</span>
         </template>
         <el-menu-item-group>
           <!-- 循环children -->
-          <el-menu-item v-for="item in menu.children" :index="item.name" @click="itemChange([menu.name, item.name])"><svg
-              class="icon el-icon" aria-hidden="true">
+          <el-menu-item v-for="item in menu.children" :index="item.name"
+            @click="itemChange([menu.name, item.name], [menu.title, item.title])"><svg class="icon el-icon"
+              aria-hidden="true">
               <use :xlink:href="item.icon"></use>
             </svg>&nbsp;
-            <span>{{ item.title }}</span></el-menu-item>
+            <span>{{ $t(item.title) }}</span></el-menu-item>
         </el-menu-item-group>
       </el-sub-menu>
       <!-- 没有children的情况 -->
-      <el-menu-item v-else :index="menu.name" @click="itemChange([menu.name])">
+      <el-menu-item v-else :index="menu.name" @click="itemChange([menu.name], [menu.title])">
         <svg class="icon" aria-hidden="true">
           <use :xlink:href="menu.icon"></use>
         </svg>&nbsp;
-        <template #title>{{ menu.title }}</template></el-menu-item>
+        <template #title>{{ $t(menu.title) }}</template></el-menu-item>
     </template>
   </el-menu>
 </template>
@@ -53,39 +54,45 @@ import '/src/assets/iconfont.js'
 //菜单集合
 const menus = ref([
   {
-    title: 'Dashboard',
+    title: 'menu.dashboard',
     name: 'Dashboard',
     icon: '#icon-dashboard'
   },
   {
-    title: '测试组',
+    title: 'menu.group',
     name: 'Group',
     icon: '#icon-user',
     children: [
       {
-        title: '用户',
+        title: 'menu.user',
         name: 'Demo1',
         icon: '#icon-user'
       },
       {
-        title: '分享',
+        title: 'menu.share',
         name: 'Demo2',
         icon: '#icon-share'
       }
     ]
   }, {
-    title: '设置',
+    title: 'menu.setting',
     name: 'Demo3',
     icon: '#icon-setting'
   }
 ])
 
 // 点击item
-const itemChange = (array) => {
+/***
+ * 左侧菜单点击，传入name和title
+ */
+const itemChange = (array, title) => {
   const name = array[array.length - 1]
+  //添加标签页，i18n的title和route的name
   asiderStore.addTableTab({ title: findTitleRecursive(menus.value, name), name: name })
   asiderStore.activeIndex = name
-  asiderStore.breadcrumbs = array
+  //导航赋值为i18n
+  asiderStore.breadcrumbs = title
+  console.log(1, title)
 }
 
 

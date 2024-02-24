@@ -1,7 +1,7 @@
 <template>
     <el-tabs v-model="asiderStore.activeIndex" type="card" closable class="demo-tabs" @edit="handleTabsEdit"
         @tab-click="tabClick">
-        <el-tab-pane v-for="item in asiderStore.editableTabs" :key="item.name" :label="item.title" :name="item.name">
+        <el-tab-pane v-for="item in asiderStore.editableTabs" :key="item.name" :label="$t(item.title)" :name="item.name">
             <RouterView />
         </el-tab-pane>
     </el-tabs>
@@ -45,7 +45,7 @@ const handleTabsEdit = (
 </script>
 <style>
 .demo-tabs>.el-tabs__content {
-    padding: 32px;
+    /* padding: 32px; */
     color: #6b778c;
     font-size: 32px;
     font-weight: 600;

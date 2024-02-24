@@ -11,9 +11,10 @@
             </el-col>
             <el-col :span="19">
                 <el-breadcrumb separator="/" class="lh46">
-                    <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Dashboard' }">Dashboard</el-breadcrumb-item>
+                    <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Dashboard' }">{{ $t('menu.dashboard')
+                    }}</el-breadcrumb-item>
                     <span v-if="asiderStore.breadcrumbs.find(x => x != 'Dashboard')"><el-breadcrumb-item
-                            v-for="item in asiderStore.breadcrumbs">{{ item }}</el-breadcrumb-item></span>
+                            v-for="item in asiderStore.breadcrumbs">{{ $t(item) }}</el-breadcrumb-item></span>
                 </el-breadcrumb></el-col>
 
             <el-col :span="1">
@@ -38,16 +39,16 @@
 
             </el-col>
             <el-col :span="3">
-                <el-dropdown trigger="click">
+                <el-dropdown trigger="click" @command="avatarCommand">
                     <span class="el-dropdown-link">
-                        <el-image class="avatar" src="/src/assets/avatar.jpg" fit="fill" />
+                        <el-image class="avatar" src="/src/assets/img/avatar.jpg" fit="fill" />
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>Dashboard</el-dropdown-item>
-                            <el-dropdown-item>Gitee</el-dropdown-item>
-                            <el-dropdown-item>Docs</el-dropdown-item>
-                            <el-dropdown-item divided>Log Out</el-dropdown-item>
+                            <el-dropdown-item command="dashboard">{{ $t('menu.dashboard') }}</el-dropdown-item>
+                            <el-dropdown-item command="gitee">Gitee</el-dropdown-item>
+                            <el-dropdown-item command="docs">{{ $t('login.docs') }}</el-dropdown-item>
+                            <el-dropdown-item command="logOut" divided>{{ $t('login.logOut') }}</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -84,6 +85,25 @@ const useI18 = useI18n()
 const languageCommand = (command) => {
     useI18.locale.value = command
     localStorage.setItem("language", command)
+}
+
+//头像下拉框
+const avatarCommand = (command) => {
+    switch (command) {
+        case 'logOut':
+            localStorage.removeItem('token')
+            router.replace('login')
+            break;
+        case 'dashboard':
+            router.push('dashboard')
+            break;
+        case 'docs':
+            break;
+        case 'gitee':
+            break;
+
+
+    }
 }
 
 

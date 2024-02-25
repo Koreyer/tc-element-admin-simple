@@ -58,7 +58,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 import { useI18n } from 'vue-i18n';
 
-// 获取当前语言设置
 const { t } = useI18n();
 const login = () => {
     api.loginByEmail(account.value).then(res => {

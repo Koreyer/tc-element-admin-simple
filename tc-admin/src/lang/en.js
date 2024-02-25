@@ -15,6 +15,10 @@ const en = {
         success: 'Login successful!',
         faild: 'Login failed, please check your account and password!',
         lockOut: 'Account locked!'
+    }, common: {
+        name: 'Name',
+        sex: 'Sex',
+        class: 'Class'
     }, column: {
         city: 'City',
         name: 'Name',

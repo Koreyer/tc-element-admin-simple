@@ -16,6 +16,11 @@ const zh = {
         faild: '登录失败,账号或密码错误!',
         lockOut: '账号已锁定!'
     },
+    common: {
+        name: '名称',
+        sex: '性别',
+        class: '班级'
+    },
     column: {
         city: '城市',
         name: '名称',

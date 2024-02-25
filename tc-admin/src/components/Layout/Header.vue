@@ -13,7 +13,7 @@
                 <el-breadcrumb separator="/" class="lh46">
                     <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Dashboard' }">{{ $t('menu.dashboard')
                     }}</el-breadcrumb-item>
-                    <span v-if="asiderStore.breadcrumbs.find(x => x != 'Dashboard')"><el-breadcrumb-item
+                    <span v-if="asiderStore.breadcrumbs.find(x => x != 'menu.dashboard')"><el-breadcrumb-item
                             v-for="item in asiderStore.breadcrumbs">{{ $t(item) }}</el-breadcrumb-item></span>
                 </el-breadcrumb></el-col>
 
@@ -71,9 +71,9 @@ const router = useRouter()
 import { useAsiderStore } from '/src/stores/asider.js'
 const asiderStore = useAsiderStore()
 const replaceHome = () => {
-    // router.replace('/Demo4')
+    router.replace('dashboard')
     asiderStore.activeIndex = 'Dashboard'
-    asiderStore.breadcrumbs = ['Dashboard']
+    asiderStore.breadcrumbs = ['menu.dashboard']
     setTimeout(() => {
         location.reload();
     }, 200)
@@ -95,7 +95,7 @@ const avatarCommand = (command) => {
             router.replace('login')
             break;
         case 'dashboard':
-            router.push('dashboard')
+            replaceHome()
             break;
         case 'docs':
             break;

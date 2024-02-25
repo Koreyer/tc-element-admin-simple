@@ -39,47 +39,23 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const title = import.meta.env.VITE_APP_TITLE
+import useEnv from '@/hooks/useEnv';
+const title = useEnv.VITE_APP_TITLE
 
 import { useAsiderStore } from '../../stores/asider'
 const asiderStore = useAsiderStore()
 //logo
 // const url = ref('../assets/logo.svg')
-import url from '/src/assets/logo.svg'
+import url from '@/assets/logo.svg'
 
-import '/src/assets/iconfont.js'
+import '@/assets/iconfont.js'
 
 
+import rouApi from "@/api/routerApi"
+import findHelp from '@/utils/findHelp.js'
 
 //菜单集合
-const menus = ref([
-  {
-    title: 'menu.dashboard',
-    name: 'Dashboard',
-    icon: '#icon-dashboard'
-  },
-  {
-    title: 'menu.group',
-    name: 'Group',
-    icon: '#icon-user',
-    children: [
-      {
-        title: 'menu.user',
-        name: 'Demo1',
-        icon: '#icon-user'
-      },
-      {
-        title: 'menu.share',
-        name: 'Demo2',
-        icon: '#icon-share'
-      }
-    ]
-  }, {
-    title: 'menu.setting',
-    name: 'Demo3',
-    icon: '#icon-setting'
-  }
-])
+const menus = ref(rouApi.getRouter())
 
 // 点击item
 /***
@@ -88,31 +64,14 @@ const menus = ref([
 const itemChange = (array, title) => {
   const name = array[array.length - 1]
   //添加标签页，i18n的title和route的name
-  asiderStore.addTableTab({ title: findTitleRecursive(menus.value, name), name: name })
+  asiderStore.addTableTab({ title: findHelp.findTitleRecursive(menus.value, name), name: name })
   asiderStore.activeIndex = name
   //导航赋值为i18n
   asiderStore.breadcrumbs = title
-  console.log(1, title)
 }
 
 
-//递归查找
-function findTitleRecursive(menuItems, targetName) {
-  for (const menuItem of menuItems) {
-    if (menuItem.name === targetName) {
-      return menuItem.title;
-    }
 
-    if (menuItem.children && menuItem.children.length > 0) {
-      const foundTitle = findTitleRecursive(menuItem.children, targetName);
-      if (foundTitle) {
-        return foundTitle;
-      }
-    }
-  }
-
-  return null;
-}
 
 
 

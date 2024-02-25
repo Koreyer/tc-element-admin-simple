@@ -15,9 +15,12 @@ const asiderStore = useAsiderStore()
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const tabClick = (TabsPaneContext,) => {
+import rouApi from "@/api/routerApi.js"
+import findHelp from '@/utils/findHelp.js'
+const menus = ref(rouApi.getRouter())
+const tabClick = (TabsPaneContext) => {
     asiderStore.activeIndex = TabsPaneContext.paneName
-    console.log('name', TabsPaneContext.paneName)
+    asiderStore.breadcrumbs = findHelp.findTitles(menus.value, findHelp.findTitleRecursive(menus.value, TabsPaneContext.paneName))
     router.push(TabsPaneContext.paneName)
 }
 

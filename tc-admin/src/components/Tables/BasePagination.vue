@@ -8,7 +8,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emit = defineEmits('pageIndex', 'pageSize')
+const emit = defineEmits(['pageIndex', 'pageSize'])
 
 const page = ref({
     total: 100,

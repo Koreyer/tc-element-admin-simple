@@ -1,6 +1,6 @@
 <template>
     <el-dialog v-model="props.dialogVisible" :title="$t(props.formType.title)" :width="props.formType.width"
-        @close="handleClose">
+        @closed="handleClose">
         <el-form :model="props.formData" :label-width="props.formType.labelWidth">
             <el-row>
                 <el-col :span="(24 / (assembly.col || 1))" v-for="assembly in props.assemblys">
@@ -29,12 +29,16 @@
                 </el-col>
             </el-row>
             <el-row>
-                <el-col :span="14"></el-col>
-                <el-col :span="3" v-for="button in props.buttons">
-                    <el-button v-if="formType.type == button.type || button.type == 'cancel'" @click="button.change"
-                        :style="{ 'width': button.width, 'color': button.color || '#66686c', 'background-color': button.bgColor || 'white' }">{{
-                            $t(button.text)
-                        }}</el-button></el-col>
+                <el-col :span="12"></el-col>
+                <div v-for="button in props.buttons">
+                    <el-col :span="6" v-if="formType.type == button.type || button.type == 'cancel'"
+                        style="margin-left: 30px;">
+                        <el-button @click="button.change"
+                            :style="{ 'width': button.width, 'color': button.color || '#66686c', 'background-color': button.bgColor || 'white' }">{{
+                                $t(button.text)
+                            }}</el-button></el-col>
+                </div>
+
             </el-row>
         </el-form>
     </el-dialog>
@@ -43,18 +47,16 @@
 
 <script setup>
 
-import { ref } from 'vue'
 
 const props = defineProps(['dialogVisible', 'formType', 'assemblys', 'buttons', 'formData'])
-const emit = defineEmits('close')
-const data = ref(props.formData)
+const emit = defineEmits(['close'])
 
 
 const handleClose = () => {
     props.assemblys.forEach(assembly => {
-        data.value[assembly.prop] = assembly.value
+        props.formData[assembly.prop] = assembly.value
     })
-    emit('close', data.value)
+    emit('close', props.formData)
 }
 
 

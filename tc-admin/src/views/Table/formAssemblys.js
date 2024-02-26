@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 const data = ref({
     name: '小明',
-    selectValue: 'class1',
+    class: 'class1',
     checkbox: [],
     radio: 'false',
     // password: '',
@@ -20,10 +20,10 @@ const assemblys = ref([
         col: 2
     }, {
         name: 'select',
-        value: data.value.selectValue,
+        value: data.value.class,
         label: 'common.class',
         text: 'data.select',
-        prop: 'selectValue',
+        prop: 'class',
         col: 2,
         selectOptions: [{
             value: 'class1',

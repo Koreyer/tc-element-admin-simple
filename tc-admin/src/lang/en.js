@@ -17,20 +17,25 @@ const en = {
         lockOut: 'Account locked!'
     }, common: {
         name: 'Name',
-        sex: 'Sex',
-        class: 'Class'
+        empty: '',
+        class: 'Class',
+        man: 'Man',
+        women: 'Women'
     }, column: {
         city: 'City',
         name: 'Name',
         fullName: 'FullName',
-        operations: 'Operations'
+        operations: 'Operations',
+        sex: 'Sex',
+        description: 'Description'
     },
     menu: {
         dashboard: 'Dashboard',
         group: 'Group',
         user: 'User',
         setting: 'Setting',
-        share: 'Share'
+        share: 'Share',
+        table: 'Table'
     },
     data: {
         detail: 'Detail',
@@ -39,7 +44,10 @@ const en = {
         add: 'Add',
         search: 'Search',
         placeholder: 'Please input',
-        select: 'Select'
+        select: 'Select',
+        checkBox: 'CheckBox',
+        radio: 'Radio',
+        cancel: 'Cancel'
     }, role: {
         noRole: 'No Role'
     }

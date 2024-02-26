@@ -56,6 +56,7 @@ import findHelp from '@/utils/findHelp.js'
 
 //菜单集合
 const menus = ref(rouApi.getRouter())
+console.log('menus', menus.value)
 
 // 点击item
 /***

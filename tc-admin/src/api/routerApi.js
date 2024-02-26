@@ -24,6 +24,10 @@ const getRouter = () => {
                 }
             ]
         }, {
+            title: 'menu.table',
+            name: 'Table',
+            icon: '#icon-setting'
+        }, {
             title: 'menu.setting',
             name: 'Demo3',
             icon: '#icon-setting'

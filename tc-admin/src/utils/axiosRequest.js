@@ -1,8 +1,9 @@
 import axios from 'axios'
-import router from '@/router'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import useEnv from "@/hooks/useEnv";
 import user from "./userUtil"
-import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 let reqConfig
 let loadingE
 const VITE_BASE_API = useEnv.VITE_BASE_API;
@@ -75,7 +76,7 @@ service.interceptors.response.use(
             duration: 2000,
             onClose: () => {
                 if (status == 401) {
-                    console.log("需要重新登录了")
+                    router.push('login')
                 }
             }
         })

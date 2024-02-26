@@ -5,6 +5,7 @@ import Demo2 from '../views/Demo2.vue'
 import Demo3 from '../views/Demo3.vue'
 import Dashboard from '../views/Demo4.vue'
 import Login from '../views/Login/Login.vue'
+import Table from '@/views/Table/Table.vue'
 
 
 
@@ -31,6 +32,10 @@ const router = createRouter({
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard
+      }, {
+        path: '/table',
+        name: 'table',
+        component: Table
       }]
     }, {
       path: '/Login',

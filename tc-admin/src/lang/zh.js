@@ -18,21 +18,26 @@ const zh = {
     },
     common: {
         name: '名称',
-        sex: '性别',
-        class: '班级'
+        class: '班级',
+        empty: '',
+        man: '男',
+        women: '女'
     },
     column: {
         city: '城市',
         name: '名称',
         fullName: '姓名',
-        operations: '选项'
+        operations: '选项',
+        sex: '性别',
+        description: '描述'
     },
     menu: {
         dashboard: '首页',
         group: '分组',
         user: '用户',
         setting: '设置',
-        share: '分享'
+        share: '分享',
+        table: '表格'
     },
     data: {
         detail: '详情',
@@ -41,7 +46,10 @@ const zh = {
         add: '新增',
         search: '搜索',
         placeholder: '请输入内容',
-        select: '下拉选择'
+        select: '下拉选择',
+        checkBox: '多选',
+        radio: '单选',
+        cancel: '取消'
     }, role: {
         noRole: '没有权限'
     }

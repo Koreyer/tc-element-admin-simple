@@ -9,6 +9,16 @@ const data = ref({
     sex: '男'
 })
 
+const newData = ref({
+    name: '小明',
+    class: 'class1',
+    checkbox: [],
+    radio: 'false',
+    // password: '',
+    // textarea: '',
+    sex: '男'
+})
+
 const assemblys = ref([
     {
         name: 'input',
@@ -93,5 +103,5 @@ const assemblys = ref([
 ])
 
 export default {
-    assemblys, data
+    assemblys, data, newData
 }

@@ -1,7 +1,8 @@
 <template>
     <el-dialog v-model="props.dialogVisible" :title="$t(props.formType.title)" :width="props.formType.width"
         @closed="handleClose">
-        <el-form :model="props.formData" :label-width="props.formType.labelWidth">
+        <el-form :model="props.formType.type == 'add' ? props.newData : props.formData"
+            :label-width="props.formType.labelWidth">
             <el-row>
                 <el-col :span="(24 / (assembly.col || 1))" v-for="assembly in props.assemblys">
                     <el-form-item :label="$t(assembly.label)">
@@ -48,7 +49,7 @@
 <script setup>
 
 
-const props = defineProps(['dialogVisible', 'formType', 'assemblys', 'buttons', 'formData'])
+const props = defineProps(['dialogVisible', 'formType', 'assemblys', 'buttons', 'formData', 'newData', 'submit'])
 const emit = defineEmits(['close'])
 
 
@@ -56,7 +57,11 @@ const handleClose = () => {
     props.assemblys.forEach(assembly => {
         props.formData[assembly.prop] = assembly.value
     })
-    emit('close', props.formData)
+    if (props.submit) {
+        emit('close', props.formData)
+        console.log(props.submit)
+    }
+    props.submit = false
 }
 
 

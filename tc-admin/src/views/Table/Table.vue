@@ -8,7 +8,7 @@
     <!-- {{ GLOBAL.titleName }} -->
 
     <BaseForm :buttons="buttons" :assemblys="formAssembly" :formType="formType" :dialogVisible='dialogVisible'
-        @close='formClose' :formData="formAssemblys.data"></BaseForm>
+        @close='formClose' :formData="formAssemblys.data" :newData='formAssemblys.newData' :submit='formSubmit'></BaseForm>
 </template>
 
 
@@ -44,10 +44,10 @@ searchAssembly.value.find(x => x.type == 'add').change = () => {
     formAssemblys.assemblys.value.forEach(assembly => {
         if ((typeof assembly.value) == 'object') {
             assembly.value = []
-            formAssemblys.data.value[assembly.prop] = []
+            formAssemblys.newData.value[assembly.prop] = []
         } else {
             assembly.value = ''
-            formAssemblys.data.value[assembly.prop] = ''
+            formAssemblys.newData.value[assembly.prop] = ''
         }
     })
     showDialog()
@@ -67,7 +67,7 @@ const showDialog = () => {
 //表格组件
 import tableAssembly from './tableAssemblys'
 
-const datas = ref(tableAssembly.datas)
+const datas = tableAssembly.datas
 const columns = ref(tableAssembly.columns)
 
 
@@ -109,7 +109,7 @@ const editShow = (data) => {
     formType.value.type = 'edit'
     formAssemblys.data = data
     formAssemblys.assemblys.value.forEach(assembly => {
-        assembly.value = formAssemblys.data[assembly.prop]
+        assembly.value = data[assembly.prop]
     })
     console.log('formAssemblys.data ', formAssemblys.assemblys.value)
     dialogVisible.value = true
@@ -126,24 +126,29 @@ const formClose = (data) => {
 import buttonAssemblys from './buttonAssemblys'
 const buttons = buttonAssemblys.buttons
 
+const formSubmit = ref(false)
+
 //重写按钮
 
+
 buttons.value.find(x => x.type === 'add').change = () => {
+    formSubmit.value = true
     dialogVisible.value = false
     console.log('新增数据', formAssemblys.data)
 
 }
 buttons.value.find(x => x.type == 'edit').change = () => {
+    formSubmit.value = true
     // 找到要替换的数据的索引
     const index = datas.value.findIndex(item => item.name === formAssemblys.data.name);
     // 如果找到了匹配的索引，则替换原始数据列表中的对应位置
     if (index !== -1) {
         datas.value.splice(index, 1, formAssemblys.data);
     }
-    console.log(formAssemblys.data)
     dialogVisible.value = false
 }
 buttons.value.find(x => x.type === 'cancel').change = () => {
+    console.log('取消', formAssemblys.data, datas)
     dialogVisible.value = false
 }
 

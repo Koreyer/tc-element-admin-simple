@@ -28,6 +28,10 @@ const getRouter = () => {
             name: 'Table',
             icon: '#icon-setting'
         }, {
+            title: 'menu.table',
+            name: 'Table2',
+            icon: '#icon-setting'
+        }, {
             title: 'menu.setting',
             name: 'Demo3',
             icon: '#icon-setting'

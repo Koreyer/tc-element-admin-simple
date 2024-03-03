@@ -23,6 +23,7 @@
 <script setup>
 
 const props = defineProps(['assemblys'])
+const emit = defineEmits(['searchChange'])
 
 
 

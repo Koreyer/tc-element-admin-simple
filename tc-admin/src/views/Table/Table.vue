@@ -34,6 +34,8 @@ const { t } = useI18n();
 import searchAssemblys from './searchAssemblys'
 const searchAssembly = ref(searchAssemblys.assemblys)
 
+console.log('searchAssembly', searchAssembly)
+
 searchAssembly.value.find(x => x.type == 'search').change = () => {
     searchChange()
 }
@@ -54,8 +56,7 @@ searchAssembly.value.find(x => x.type == 'add').change = () => {
 }
 
 const searchChange = () => {
-    datas.value = datas.value.filter(x => x.name.includes(assemblys.value.find(x => x.label == 'column.name').value))
-    console.log(datas.value)
+    console.log('searchAssembly', searchAssembly)
 }
 
 const showDialog = () => {

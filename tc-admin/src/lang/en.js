@@ -47,7 +47,8 @@ const en = {
         select: 'Select',
         checkBox: 'CheckBox',
         radio: 'Radio',
-        cancel: 'Cancel'
+        cancel: 'Cancel',
+        delConfirm: 'Are you sure to delete this?'
     }, role: {
         noRole: 'No Role'
     }

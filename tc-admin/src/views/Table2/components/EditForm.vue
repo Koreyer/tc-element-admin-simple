@@ -12,8 +12,8 @@
         <template #footer>
             <div class="dialog-footer">
                 <el-button @click="canelChange">{{ $t('data.cancel') }}</el-button>
-                <el-button type="primary" @click="addChange(ruleFormRef)">
-                    {{ $t('data.add') }}
+                <el-button type="primary" @click="editChange(ruleFormRef)">
+                    {{ $t('data.edit') }}
                 </el-button>
             </div>
         </template>
@@ -24,17 +24,18 @@
 import { reactive, ref } from 'vue';
 
 
+
 const props = defineProps(['title', 'visible', 'data'])
-const emits = defineEmits(['canelChange', 'addChange'])
+const emits = defineEmits(['canelChange', 'editChange'])
 
 const canelChange = () => {
     emits('canelChange', false)
 }
 
-const addChange = (formEl) => {
+const editChange = (formEl) => {
     formEl.validate((valid, fields) => {
         if (valid) {
-            emits('addChange', true)
+            emits('editChange', true)
         } else {
             console.log('error submit!', fields)
         }

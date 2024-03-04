@@ -6,7 +6,12 @@
         <el-table-column fixed="right" :label="$t('column.operations')" min-width="120" align="center">
             <template #default="scope">
                 <el-button type="primary" size="small" @click="edit(scope.row)">{{ $t('data.edit') }}</el-button>
-                <el-button type="danger" size="small" @click="del(scope.row.id)">{{ $t('data.delete') }}</el-button>
+                <el-popconfirm :title="$t('data.delConfirm')" @confirm="del(scope.row.id)">
+                    <template #reference>
+                        <el-button type="danger" size="small">{{ $t('data.delete')
+                            }}</el-button>
+                    </template>
+                </el-popconfirm>
             </template>
         </el-table-column>
     </el-table>

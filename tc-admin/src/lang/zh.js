@@ -49,7 +49,8 @@ const zh = {
         select: '下拉选择',
         checkBox: '多选',
         radio: '单选',
-        cancel: '取消'
+        cancel: '取消',
+        delConfirm: '是否删除?'
     }, role: {
         noRole: '没有权限'
     }

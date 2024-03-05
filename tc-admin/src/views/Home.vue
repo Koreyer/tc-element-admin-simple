@@ -1,23 +1,43 @@
 <template>
   <div class="common-layout">
 
-    <el-container><el-container>
-        <el-aside :width="asiderStore.width" class="aside">
-          <Aside />
-        </el-aside>
-        <el-container>
+    <el-container>
+      <el-aside :width="asiderStore.width" class="aside">
+        <Aside />
+      </el-aside>
+      <el-container>
+        <el-header>
+          <Header />
+        </el-header>
+        <el-main>
+          <Main />
+        </el-main>
+        <el-footer>
+          <Footer />
+        </el-footer>
+      </el-container>
+    </el-container>
+
+
+
+    <!-- <el-container>
           <el-header>
             <Header />
           </el-header>
-          <el-main>
-            <Main />
-          </el-main>
-
-        </el-container>
-      </el-container><el-footer>
-        <Footer />
-
-      </el-footer></el-container>
+          <el-container>
+            <el-aside :width="asiderStore.width" class="aside">
+              <Aside />
+            </el-aside>
+            <el-container>
+              <el-main>
+                <Main />
+              </el-main>
+              <el-footer>
+                <Footer />
+              </el-footer>
+            </el-container>
+          </el-container>
+        </el-container> -->
 
   </div>
 </template>
@@ -43,15 +63,14 @@ import Footer from '../components/Layout/Footer.vue';
 </script>
 
 <style lang="scss">
-@media screen and (min-width: 480px) {
-  .aside {
-    height: 86vh;
-  }
+// @media screen and (min-width: 480px) {
+//   .aside {
+//     height: 86vh;
+//   }
 
-  @media screen and (min-width: 807px) {
-    .aside {
-      height: 92vh;
-    }
-  }
-}
-</style>
+//   @media screen and (min-width: 807px) {
+//     .aside {
+//       height: 92vh;
+//     }
+//   }
+// }</style>

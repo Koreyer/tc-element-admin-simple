@@ -1,6 +1,7 @@
 <template>
   <el-menu :default-active="asiderStore.activeIndex" class="el-menu-vertical-demo" :collapse="asiderStore.isCollapse"
-    @open="handleOpen" router @close="handleClose" :collapse-transition="false">
+    @open="handleOpen" router @close="handleClose" :collapse-transition="false" background-color="#304156" unique-opened
+    text-color="#bfcbd9">
     <div class="logo">
       <el-image style="width: 32px; height: 32px" :src="url" fit="fill" />
       <div class="logo-title" v-if="!asiderStore.isCollapse">{{ title }}</div>
@@ -29,6 +30,7 @@
         <svg class="icon" aria-hidden="true">
           <use :xlink:href="menu.icon"></use>
         </svg>&nbsp;
+
         <template #title>{{ $t(menu.title) }}</template></el-menu-item>
     </template>
   </el-menu>
@@ -93,24 +95,26 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 
-<style  lang="scss">
+<style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   //   min-height: 60vh;
 }
 
-@media screen and (min-width: 480px) {
-  .el-menu-vertical-demo {
-    height: 86vh;
-  }
+// @media screen and (min-width: 480px) {
+//   .el-menu-vertical-demo {
+//     height: 86vh;
+//   }
 
-  @media screen and (min-width: 807px) {
-    .el-menu-vertical-demo {
-      height: 92vh;
-    }
-  }
+// }
 
-
+// @media screen and (min-width: 807px) {
+//   .el-menu-vertical-demo {
+//     height: 100vh;
+//   }
+// }
+.el-menu-vertical-demo {
+  height: 99.5vh;
 }
 
 .icon {

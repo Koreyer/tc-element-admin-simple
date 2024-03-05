@@ -1,6 +1,6 @@
 <template>
     <p style="font-size: 20px;font-weight: 400;margin-bottom: 10px;">{{ $t(title) }}</p>
-    <Search :search="searchValue" @searchChange='searchChange' :add="addShow" class="mb20" />
+    <Search @add="addShow" class="mb20" />
     <Table :datas="datas" @edit="eidtShow" @del="del" />
     <CreateForm :visible="addDialog" title="新增" :data="newData" @canelChange="canelChange" @addChange="addChange">
     </CreateForm>
@@ -19,19 +19,10 @@ import CreateForm from './components/CreateForm.vue'
 import EditForm from './components/EditForm.vue';
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
-const title = 'menu.table'
+import routerApi from '@/api/routerApi.js'
+const title = 'menu.urlPath'
 
-const datas = ref([
-    {
-        id: 1,
-        city: '深圳',
-        name: '小明'
-    }, {
-        id: 2,
-        city: '广州',
-        name: '小红'
-    }
-])
+const datas = ref(routerApi.getRouter())
 
 
 const newData = ref({
@@ -52,9 +43,6 @@ const searchValue = ref({
     fullName: ''
 })
 
-const searchChange = () => {
-    console.log('searchChange', searchValue.value)
-}
 
 const addShow = () => {
     addDialog.value = true

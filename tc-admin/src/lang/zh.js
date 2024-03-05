@@ -37,7 +37,8 @@ const zh = {
         user: '用户',
         setting: '设置',
         share: '分享',
-        table: '表格'
+        table: '表格',
+        urlPath: '菜单管理'
     },
     data: {
         detail: '详情',

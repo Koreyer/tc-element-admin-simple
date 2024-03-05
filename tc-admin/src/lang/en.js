@@ -35,7 +35,8 @@ const en = {
         user: 'User',
         setting: 'Setting',
         share: 'Share',
-        table: 'Table'
+        table: 'Table',
+        urlPath: 'UrlPath'
     },
     data: {
         detail: 'Detail',

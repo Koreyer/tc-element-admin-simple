@@ -135,7 +135,8 @@ const handleClose = (key: string, keyPath: string[]) => {
   .logo-title {
     width: 60%;
     line-height: 32px;
-    color: #409eff;
+    // color: #409eff;
+    color: white
   }
 }
 </style>

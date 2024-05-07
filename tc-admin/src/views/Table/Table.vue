@@ -1,14 +1,14 @@
-
 <template>
     <p style="font-size: 20px;font-weight: 400;margin-bottom: 10px;">{{ $t(title) }}</p>
     <BaseSearch :assemblys="searchAssembly" />
     <BaseTable :datas="datas" :columns="columns" @editData="editShow">
     </BaseTable>
-    <BasePagination @pageIndex="pageIndex" @pageSize="pageSize" />
+    <BasePagination @pageIndexChange="pageIndexChange" @pageSizeChange="pageSizeChange" :total="page.total" />
     <!-- {{ GLOBAL.titleName }} -->
 
     <BaseForm :buttons="buttons" :assemblys="formAssembly" :formType="formType" :dialogVisible='dialogVisible'
-        @close='formClose' :formData="formAssemblys.data" :newData='formAssemblys.newData' :submit='formSubmit'></BaseForm>
+        @close='formClose' :formData="formAssemblys.data" :newData='formAssemblys.newData' :submit='formSubmit'>
+    </BaseForm>
 </template>
 
 
@@ -29,7 +29,7 @@ const title = 'menu.table'
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-
+const dialogVisible = ref(false)
 
 import searchAssemblys from './searchAssemblys'
 const searchAssembly = ref(searchAssemblys.assemblys)
@@ -61,7 +61,9 @@ const searchChange = () => {
 
 const showDialog = () => {
     dialogVisible.value = true
-    console.log('dialogVisible', dialogVisible)
+}
+const closeDialog = () => {
+    dialogVisible.value = false
 }
 
 //表格组件
@@ -77,24 +79,24 @@ const columns = ref(tableAssembly.columns)
 //分页组件
 
 const page = ref({
-    total: 100,
+    total: 13,
     pageIndex: 1,
     pageSize: 10
 
 })
 
-const pageIndex = (pageIndex) => {
+const pageIndexChange = (pageIndex) => {
     page.value.pageIndex = pageIndex
 }
 
-const pageSize = (pageSize) => {
+const pageSizeChange = (pageSize) => {
     page.value.pageSize = pageSize
 }
 
 
 //表单组件
 
-const dialogVisible = ref(false)
+
 
 
 
@@ -108,13 +110,12 @@ const formAssembly = formAssemblys.assemblys
 const editShow = (data) => {
     formType.value.title = 'data.edit'
     formType.value.type = 'edit'
-    formAssemblys.data = data
+    formAssemblys.data = JSON.parse(JSON.stringify(data))
     formAssemblys.assemblys.value.forEach(assembly => {
         assembly.value = data[assembly.prop]
     })
     console.log('formAssemblys.data ', formAssemblys.assemblys.value)
-    dialogVisible.value = true
-    // data.value = data
+    showDialog()
 }
 
 //表单数据
@@ -134,7 +135,7 @@ const formSubmit = ref(false)
 
 buttons.value.find(x => x.type === 'add').change = () => {
     formSubmit.value = true
-    dialogVisible.value = false
+    closeDialog()
     console.log('新增数据', formAssemblys.data)
 
 }
@@ -146,11 +147,12 @@ buttons.value.find(x => x.type == 'edit').change = () => {
     if (index !== -1) {
         datas.value.splice(index, 1, formAssemblys.data);
     }
-    dialogVisible.value = false
+    closeDialog()
 }
+
+
 buttons.value.find(x => x.type === 'cancel').change = () => {
-    console.log('取消', formAssemblys.data, datas)
-    dialogVisible.value = false
+    closeDialog()
 }
 
 

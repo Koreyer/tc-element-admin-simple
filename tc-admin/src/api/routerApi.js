@@ -46,13 +46,20 @@ const getRouter = () => {
             component: '/src/views/Table2/Table.vue'
         }, {
             id: 4,
+            title: 'menu.table',
+            name: 'Table',
+            icon: '#icon-setting',
+            path: '/Table',
+            component: '/src/views/Table/Table.vue'
+        }, {
+            id: 5,
             title: 'menu.setting',
             name: 'Demo3',
             icon: '#icon-setting',
             path: '/Demo3',
             component: '/src/views/Demo3.vue'
         }, {
-            id: 5,
+            id: 6,
             title: 'menu.urlPath',
             name: 'UrlPath',
             icon: '#icon-setting',

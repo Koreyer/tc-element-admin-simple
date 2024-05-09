@@ -114,7 +114,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 //   }
 // }
 .el-menu-vertical-demo {
-  height: 99.5vh;
+  height: 100vh;
 }
 
 .icon {

@@ -12,7 +12,7 @@
             <el-col :span="19">
                 <el-breadcrumb separator="/" class="lh46">
                     <el-breadcrumb-item @click="replaceHome" :to="{ path: '/Dashboard' }">{{ $t('menu.dashboard')
-                    }}</el-breadcrumb-item>
+                        }}</el-breadcrumb-item>
                     <span v-if="asiderStore.breadcrumbs.find(x => x != 'menu.dashboard')"><el-breadcrumb-item
                             v-for="item in asiderStore.breadcrumbs">{{ $t(item) }}</el-breadcrumb-item></span>
                 </el-breadcrumb></el-col>
@@ -57,12 +57,14 @@
         </el-row>
 
     </div>
+
 </template>
 
 
 
 <script setup>
 import { ref } from 'vue'
+
 import { useRouter } from 'vue-router'
 const router = useRouter()
 

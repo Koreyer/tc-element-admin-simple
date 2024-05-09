@@ -1,16 +1,21 @@
 <template>
-    <el-tabs v-model="asiderStore.activeIndex" type="card" closable class="demo-tabs" @edit="handleTabsEdit"
+    <!-- <el-tabs v-model="asiderStore.activeIndex" type="card" closable class="demo-tabs" @edit="handleTabsEdit"
         @tab-click="tabClick">
         <el-tab-pane v-for="item in asiderStore.editableTabs" :key="item.name" :label="$t(item.title)"
             :name="item.name">
             <RouterView />
         </el-tab-pane>
-    </el-tabs>
+    </el-tabs> -->
+    <TabPane />
+    <p style="height: 10px;"></p>
+    <RouterView />
 </template>
 <script lang="ts" setup>
+
+
 import { ref } from 'vue'
 import type { TabPaneName } from 'element-plus'
-
+import TabPane from '@/components/TabPane/TabPane.vue'
 import { useAsiderStore } from '@/stores/asider.js';
 const asiderStore = useAsiderStore()
 

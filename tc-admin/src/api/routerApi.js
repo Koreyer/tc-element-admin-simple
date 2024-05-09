@@ -65,6 +65,13 @@ const getRouter = () => {
             icon: '#icon-setting',
             path: '/UrlPath',
             component: '/src/views/UrlPath/UrlPath.vue'
+        }, {
+            id: 7,
+            title: 'menu.urlPath',
+            name: 'TabPane',
+            icon: '#icon-setting',
+            path: '/TabPane',
+            component: '/src/components/TabPane/TabPane.vue'
         }
     ]
 }

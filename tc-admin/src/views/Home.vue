@@ -73,4 +73,5 @@ import Footer from '../components/Layout/Footer.vue';
 //       height: 92vh;
 //     }
 //   }
-// }</style>
+// }
+// </style>

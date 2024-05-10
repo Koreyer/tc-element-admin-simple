@@ -76,6 +76,12 @@
                     <el-form-item :label="$t('column.component')" label-width="50" prop="component">
                         <el-input v-model="data.component" clearable />
                     </el-form-item></el-col>
+            </el-row><el-row>
+
+                <el-col :span="11">
+                    <el-form-item :label="$t('icon')" label-width="40" prop="icon">
+                        <el-input v-model="data.icon" clearable />
+                    </el-form-item></el-col>
             </el-row>
 
         </el-form>
@@ -124,7 +130,8 @@ const addShow = () => {
         component: '',
         name: '',
         id: '00',
-        parentId: '00'
+        parentId: '00',
+        icon: ''
     }
     if (count.value / 10 >= 1) {
         data.value.id = (count.value / 10 + count.value % 10 + 1) + ''
@@ -205,7 +212,9 @@ const canelChange = () => {
 }
 const ruleFormRef = ref()
 //表单校验
-import { rules } from './rules.js'
+import rule from './rules.js'
+const rules = reactive(rule.rules)
+
 
 const addChange = async (formEl) => {
     if (!formEl) return

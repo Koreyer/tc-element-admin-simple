@@ -9,21 +9,20 @@
                     <p>{{ $t('login.tips') }}</p>
                 </div>
                 <div class="login">
-                    <el-form>
-                        <el-form-item>
-
+                    <el-form :model="account" ref="ruleFormRef" :rules="rules">
+                        <el-form-item prop="email">
                             <el-input v-model="account.email" :placeholder="$t('login.email')" clearable
-                                :suffix-icon="Message" />
+                                :prefix-icon="Message" />
                         </el-form-item>
-                        <el-form-item>
+                        <el-form-item prop="password">
                             <el-input v-model="account.password" type="password" :placeholder="$t('login.password')"
-                                clearable :suffix-icon="Lock" />
+                                clearable :prefix-icon="Lock" />
                         </el-form-item>
                         <p class="forgot">{{ $t('login.forgot') }}</p>
 
                         <el-form-item>
-                            <el-button @click="login" class="login-button">{{ $t('login.logIn')
-                            }}</el-button>
+                            <el-button @click="login(ruleFormRef)" class="login-button">{{ $t('login.logIn')
+                                }}</el-button>
                         </el-form-item>
                     </el-form>
                     <el-divider>
@@ -46,42 +45,66 @@
 import bg from '@/assets/img/bg.png'
 import wel from '@/assets/img/home.png'
 import { Message, Lock } from '@element-plus/icons-vue'
-import { ref } from 'vue'
-const account = ref({
-    email: 'zzh164@qq.com',
-    password: '123456'
-})
-
+import { ref, reactive } from 'vue'
+import inputHelp from '@/utils/inputHelp'
 import api from './api'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import { useI18n } from 'vue-i18n';
 
+
+
+//表单校验
+import rule from './rules'
+const ruleFormRef = ref()
+const rules = reactive(rule.rules)
+
+
+
+
+
+const account = ref({
+    email: 'zzh164@qq.com',
+    password: '123456'
+})
+
 const { t } = useI18n();
-const login = () => {
-    api.loginByEmail(account.value).then(res => {
-        console.log(56, res)
-        if (res.success) {
-            ElMessage({
-                message: t('login.success'),
-                type: 'success',
-                duration: 2000,
-                onClose: () => {
-                    router.push('dashboard')
+const login = async (formEl) => {
+    // if (!formEl) return
+    console.log(formEl)
+    await formEl.validate((valid, fields) => {
+        console.log(22)
+        if (valid) {
+            api.loginByEmail(account.value).then(res => {
+                if (res.success) {
+                    localStorage.setItem('token', res.token)
+                    ElMessage({
+                        message: t('login.success'),
+                        type: 'success',
+                        duration: 2000,
+                        onClose: () => {
+                            router.push('dashboard')
+                        }
+                    })
+                } else {
+                    let message = t('login.faild')
+                    if (res.code == 423) {
+                        message = t('login.lockOut')
+                    }
+                    ElMessage({
+                        message: message,
+                        type: 'error'
+                    })
                 }
             })
         } else {
-            let message = t('login.faild')
-            if (res.code == 423) {
-                message = t('login.lockOut')
-            }
-            ElMessage({
-                message: message,
-                type: 'error'
-            })
+            console.log('error submit!', fields)
         }
     })
+
+
+
 
 
 }

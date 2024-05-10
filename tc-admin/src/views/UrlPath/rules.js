@@ -12,6 +12,9 @@ const rules = {
     ], component: [
         { required: true, message: '请输入组件路径', trigger: 'blur' },
         { pattern: /^[a-zA-Z0-9./]+$/, message: '请输入字母、数字、/和.', trigger: 'blur' },
+    ], icon: [
+        { required: true, message: '请输入图标名称', trigger: 'blur' },
+        { pattern: /^[!-~]+$/, message: '请输入规定的图标命名', trigger: 'blur' },
     ]
 }
 

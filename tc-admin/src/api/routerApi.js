@@ -3,7 +3,7 @@
 const getRouter = () => {
     return [
         {
-            id: 1,
+            id: '01',
             title: 'menu.dashboard',
             name: 'Dashboard',
             icon: '#icon-dashboard',
@@ -11,13 +11,13 @@ const getRouter = () => {
             component: '/src/views/Demo4.vue'
         },
         {
-            id: 2,
+            id: '02',
             title: 'menu.group',
             name: 'Group',
             icon: '#icon-user',
             children: [
                 {
-                    id: 21,
+                    id: '01',
                     title: 'menu.user',
                     name: 'Demo1',
                     icon: '#icon-user',
@@ -25,7 +25,7 @@ const getRouter = () => {
                     component: '/src/views/Demo1.vue'
                 },
                 {
-                    id: 22,
+                    id: '02',
                     title: 'menu.share',
                     name: 'Demo2',
                     icon: '#icon-share',
@@ -38,35 +38,35 @@ const getRouter = () => {
             //     name: 'Table',
             //     icon: '#icon-setting'
         }, {
-            id: 3,
+            id: '03',
             title: 'menu.table',
             name: 'Table2',
             icon: '#icon-setting',
             path: '/Table2',
             component: '/src/views/Table2/Table.vue'
         }, {
-            id: 4,
+            id: '04',
             title: 'menu.table',
             name: 'Table',
             icon: '#icon-setting',
             path: '/Table',
             component: '/src/views/Table/Table.vue'
         }, {
-            id: 5,
+            id: '05',
             title: 'menu.setting',
             name: 'Demo3',
             icon: '#icon-setting',
             path: '/Demo3',
             component: '/src/views/Demo3.vue'
         }, {
-            id: 6,
+            id: '06',
             title: 'menu.urlPath',
             name: 'UrlPath',
             icon: '#icon-setting',
             path: '/UrlPath',
             component: '/src/views/UrlPath/UrlPath.vue'
         }, {
-            id: 7,
+            id: '07',
             title: 'menu.urlPath',
             name: 'TabPane',
             icon: '#icon-setting',

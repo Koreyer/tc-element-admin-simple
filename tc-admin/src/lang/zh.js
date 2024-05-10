@@ -29,7 +29,10 @@ const zh = {
         fullName: '姓名',
         operations: '选项',
         sex: '性别',
-        description: '描述'
+        description: '描述',
+        path: '路径',
+        component: '组件',
+        title: '标题'
     },
     menu: {
         dashboard: '首页',

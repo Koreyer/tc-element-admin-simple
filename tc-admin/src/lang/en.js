@@ -27,7 +27,10 @@ const en = {
         fullName: 'FullName',
         operations: 'Operations',
         sex: 'Sex',
-        description: 'Description'
+        description: 'Description',
+        path: 'Path',
+        component: 'Component',
+        title: 'Title'
     },
     menu: {
         dashboard: 'Dashboard',
@@ -36,7 +39,8 @@ const en = {
         setting: 'Setting',
         share: 'Share',
         table: 'Table',
-        urlPath: 'UrlPath'
+        urlPath: 'UrlPath',
+
     },
     data: {
         detail: 'Detail',

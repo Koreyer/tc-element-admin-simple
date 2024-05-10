@@ -27,12 +27,16 @@ const indexChange = (item) => {
 const closeChange = (name, index) => {
     if (asiderStore.editableTabs.length > 1) {
         asiderStore.removeTab(name)
-        if (asiderStore.activeIndex == name) {
-            const item = asiderStore.editableTabs[index - 1]
-            asiderStore.activeIndex = item.name
-            asiderStore.breadcrumbs = [item.title]
-            router.replace(item.name)
+        var item;
+        if (index == 0 && asiderStore.activeIndex == name) {
+            item = asiderStore.editableTabs[index]
+        } else if (asiderStore.activeIndex == name) {
+            item = asiderStore.editableTabs[index - 1]
         }
+        asiderStore.activeIndex = item.name
+        asiderStore.breadcrumbs = [item.title]
+        router.replace(item.name)
+
     }
 
 

@@ -30,6 +30,12 @@ const tabClick = (TabsPaneContext) => {
     router.push(TabsPaneContext.paneName)
 }
 
+//刚进来的时候跳转到当前路由
+const checkPath = () => {
+    router.replace(asiderStore.activeIndex)
+}
+checkPath()
+
 const handleTabsEdit = (
     targetName: TabPaneName | undefined
 ) => {

@@ -56,7 +56,8 @@ const en = {
         delConfirm: 'Are you sure to delete this?'
     }, role: {
         noRole: 'No Role'
-    }
+    },
+    icon: 'Icon'
 }
 
 export default en

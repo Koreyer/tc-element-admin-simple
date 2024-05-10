@@ -57,7 +57,8 @@ const zh = {
         delConfirm: '是否删除?'
     }, role: {
         noRole: '没有权限'
-    }
+    },
+    icon: '图标'
 }
 
 

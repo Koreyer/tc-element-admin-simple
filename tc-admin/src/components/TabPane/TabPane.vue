@@ -28,10 +28,19 @@ const closeChange = (name, index) => {
     if (asiderStore.editableTabs.length > 1) {
         asiderStore.removeTab(name)
         var item;
-        if (index == 0 && asiderStore.activeIndex == name) {
-            item = asiderStore.editableTabs[index]
-        } else if (asiderStore.activeIndex == name) {
+        // 选择末尾标签然后删除末尾标签的情况
+        //删除末尾标签，然后将上一个标签当作新的末尾标签并且选中
+        if (name == asiderStore.activeIndex && index == asiderStore.editableTabs.length) {
             item = asiderStore.editableTabs[index - 1]
+        }
+        //选择末尾标签然后删除前面标签的情况下
+        if (name != asiderStore.activeIndex && index + 1 < asiderStore.editableTabs.length) {
+            return
+        }
+        //选择前面标签并且删除当前标签的情况下
+        //删除当前标签，选中右边的标签
+        if (name == asiderStore.activeIndex && index < asiderStore.editableTabs.length - 1 || index == 0 && asiderStore.activeIndex == name) {
+            item = asiderStore.editableTabs[index]
         }
         asiderStore.activeIndex = item.name
         asiderStore.breadcrumbs = [item.title]

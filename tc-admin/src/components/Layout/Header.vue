@@ -76,9 +76,7 @@ const replaceHome = () => {
     router.replace('dashboard')
     asiderStore.activeIndex = 'Dashboard'
     asiderStore.breadcrumbs = ['menu.dashboard']
-    setTimeout(() => {
-        location.reload();
-    }, 200)
+    asiderStore.addTableTab({ name: 'Dashboard', title: 'menu.dashboard' })
 }
 
 //语言切换

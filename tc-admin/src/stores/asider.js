@@ -15,6 +15,9 @@ export const useAsiderStore = defineStore('asider', () => {
             width.value = '200px'
         }
     }
+    /**
+     * 需要传入路由对象
+     */
     const addTableTab = (obj) => {
         // console.log('obj', obj)
         if (editableTabs.value.find(x => x.name == obj.name) == undefined)

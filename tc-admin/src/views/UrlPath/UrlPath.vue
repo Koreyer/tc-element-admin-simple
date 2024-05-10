@@ -19,6 +19,13 @@
         <el-table-column prop="name" :label="$t('column.name')" align="center"></el-table-column>
         <el-table-column prop="path" :label="$t('column.path')" align="center"></el-table-column>
         <el-table-column prop="component" :label="$t('column.component')" align="center"></el-table-column>
+        <el-table-column :label="$t('icon')" align="center">
+            <template #default="scope">
+                <svg class="icon" aria-hidden="true">
+                    <use :xlink:href="scope.row.icon"></use>
+                </svg>
+            </template>
+        </el-table-column>
         <el-table-column fixed="right" :label="$t('column.operations')" min-width="120" align="center">
             <template #default="scope">
                 <el-button type="primary" size="small" @click="eidtShow(scope.row)">{{ $t('data.edit') }}</el-button>
@@ -80,7 +87,11 @@
 
                 <el-col :span="11">
                     <el-form-item :label="$t('icon')" label-width="40" prop="icon">
-                        <el-input v-model="data.icon" clearable />
+                        <el-input v-model="data.icon" clearable>
+                            <template #append><svg class="icon" aria-hidden="true">
+                                    <use :xlink:href="data.icon"></use>
+                                </svg></template>
+                        </el-input>
                     </el-form-item></el-col>
             </el-row>
 

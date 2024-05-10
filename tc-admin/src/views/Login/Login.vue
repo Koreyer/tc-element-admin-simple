@@ -18,7 +18,15 @@
                             <el-input v-model="account.password" type="password" :placeholder="$t('login.password')"
                                 clearable :prefix-icon="Lock" />
                         </el-form-item>
-                        <p class="forgot">{{ $t('login.forgot') }}</p>
+                        <div style="display: flex;justify-content: space-between;height: 32px;line-height: 32px;">
+                            <p>
+                                <el-checkbox size="small" v-model="remember"
+                                    :label="$t('login.remember')"></el-checkbox>
+                            </p>
+                            <p class="forgot">{{ $t('login.forgot') }}</p>
+                        </div>
+
+
 
                         <el-form-item>
                             <el-button @click="login(ruleFormRef)" class="login-button">{{ $t('login.logIn')
@@ -52,6 +60,7 @@ import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import { useI18n } from 'vue-i18n';
+const remember = ref(Boolean(localStorage.getItem('remember')) || false)
 
 
 
@@ -65,8 +74,8 @@ const rules = reactive(rule.rules)
 
 
 const account = ref({
-    email: 'zzh164@qq.com',
-    password: '123456'
+    email: localStorage.getItem('email') || '',
+    password: localStorage.getItem('ac') || ''
 })
 
 const { t } = useI18n();
@@ -79,6 +88,11 @@ const login = async (formEl) => {
             api.loginByEmail(account.value).then(res => {
                 if (res.success) {
                     localStorage.setItem('token', res.token)
+                    if (remember.value) {
+                        localStorage.setItem('remember', true)
+                        localStorage.setItem('email', account.value.email)
+                        localStorage.setItem('ac', account.value.password)
+                    }
                     ElMessage({
                         message: t('login.success'),
                         type: 'success',
@@ -130,7 +144,7 @@ const thirdParty = ref([{
 <style lang="scss">
 .box {
     padding: 89.5px 0;
-    background-color: #1b31ba;
+    background: linear-gradient(#f9fafc, #e3ebf6);
 
     .login-box {
         width: 70vw;
@@ -167,7 +181,7 @@ const thirdParty = ref([{
 
                 .forgot:hover {
                     cursor: pointer;
-                    color: blue
+                    color: #1b31ba
                 }
 
                 .login-button {

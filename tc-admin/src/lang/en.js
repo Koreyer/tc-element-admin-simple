@@ -14,7 +14,8 @@ const en = {
         docs: 'Docs',
         success: 'Login successful!',
         faild: 'Login failed, please check your account and password!',
-        lockOut: 'Account locked!'
+        lockOut: 'Account locked!',
+        remember: 'Remember Me'
     }, common: {
         name: 'Name',
         empty: '',

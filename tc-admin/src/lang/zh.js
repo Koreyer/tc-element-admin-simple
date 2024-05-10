@@ -14,7 +14,8 @@ const zh = {
         docs: '文档',
         success: '登陆成功!',
         faild: '登录失败,账号或密码错误!',
-        lockOut: '账号已锁定!'
+        lockOut: '账号已锁定!',
+        remember: '记住我'
     },
     common: {
         name: '名称',

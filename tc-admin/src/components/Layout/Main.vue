@@ -34,7 +34,7 @@ const tabClick = (TabsPaneContext) => {
 const checkPath = () => {
     router.replace(asiderStore.activeIndex)
 }
-checkPath()
+// checkPath()
 
 const handleTabsEdit = (
     targetName: TabPaneName | undefined

@@ -37,10 +37,17 @@ const closeChange = (name, index) => {
         if (name != asiderStore.activeIndex && index + 1 < asiderStore.editableTabs.length) {
             return
         }
-        //选择前面标签并且删除当前标签的情况下
-        //删除当前标签，选中右边的标签
-        if (name == asiderStore.activeIndex && index < asiderStore.editableTabs.length - 1 || index == 0 && asiderStore.activeIndex == name) {
-            item = asiderStore.editableTabs[index]
+
+        //删除当前标签
+        if (name == asiderStore.activeIndex && index <= asiderStore.editableTabs.length - 1 || index == 0 && asiderStore.activeIndex == name) {
+            console.log("jin")
+            //1.下一个存在时选择下一个，2.下一个不存在时选择上一个
+            if (asiderStore.editableTabs.length > 1) {
+                item = asiderStore.editableTabs[index]
+            } else {
+                item = asiderStore.editableTabs[index - 1]
+            }
+
         }
         asiderStore.activeIndex = item.name
         asiderStore.breadcrumbs = [item.title]

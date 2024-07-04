@@ -31,6 +31,9 @@ export default defineConfig(({ mode, command }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
+    }, server: {
+      //网站端口
+      port: 1350
     }
   }
 })
